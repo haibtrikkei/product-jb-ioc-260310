@@ -1,0 +1,17 @@
+global:
+  scrape_interval: 15s # Thời gian định kỳ cào (scrape) metric
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  - job_name: 'spring-boot-app'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      # Tên 'product-backend' phải trùng với tên service trong docker-compose
+      - targets: ['product-backend:8080']
