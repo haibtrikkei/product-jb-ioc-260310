@@ -50,7 +50,20 @@ services:
     restart: unless-stopped
     ports:
       - "9100:9100"
+  # --- THÊM GRAFANA TẠI ĐÂY ---
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin # Bạn có thể đổi mật khẩu tại đây
+    volumes:
+      - grafana_data:/var/lib/grafana
 
 volumes:
   product-db-data:
   prometheus-data:
+  grafana_data:
